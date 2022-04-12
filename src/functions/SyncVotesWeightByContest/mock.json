@@ -1,0 +1,6 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{ \"payload\": { \"contestId\": \"a3d7be7e-f2f1-4b92-a1b1-3c69f1ed3ba0\" } }"
+}
