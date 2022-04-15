@@ -3,7 +3,7 @@ const fetch = require("node-fetch")
 /**
  * 
  */
-const TRANSACTION_API = (txId: string) => `https://mainnet-algorand.api.purestake.io/idx2/v2/transactions/${txId}`
+const TRANSACTION_API = (txId: string) => `https://testnet-algorand.api.purestake.io/idx2/v2/transactions/${txId}`
 
 export const validateTransaction = async (txId: string, sender: string, prefix: string) => {
     let isValid
