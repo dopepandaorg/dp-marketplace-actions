@@ -1,0 +1,6 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{ \"wallet\": \"WPHTZTXYEJA3LTEZHIBBK7ZGOQAUCM2ZX4KWW3KTHCK4C733OO2G4GOKHM\" }"
+}
