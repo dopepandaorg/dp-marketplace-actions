@@ -3,6 +3,7 @@ import type { AWS } from '@serverless/typescript';
 import SyncProfileWithTx from '@functions/SyncProfileWithTx';
 import CastVoteWithTx from '@functions/CastVoteWithTx'
 import SyncVotesWeightByContest from '@functions/SyncVotesWeightByContest'
+import ConnectProfile from '@functions/ConnectProfile'
 
 const serverlessConfiguration: AWS = {
   service: 'dp-marketplace-actions',
@@ -22,7 +23,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { SyncProfileWithTx, CastVoteWithTx, SyncVotesWeightByContest },
+  functions: { SyncProfileWithTx, CastVoteWithTx, SyncVotesWeightByContest, ConnectProfile },
   package: { individually: true },
   custom: {
     esbuild: {
