@@ -21,6 +21,7 @@ export default {
   environment: {
     HASURA_API: process.env.HASURA_API,
     HASURA_SECRET: process.env.HASURA_SECRET,
-    PURESTAKE_API_KEY: process.env.PURESTAKE_API_KEY
+    PURESTAKE_API_KEY: process.env.PURESTAKE_API_KEY,
+    NETWORK_ENV: process.env.NETWORK_ENV
   }
 };
