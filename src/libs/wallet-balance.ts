@@ -3,7 +3,7 @@ const fetch = require("node-fetch")
 /**
  * Chcek balance
  */
-const BALANCE_API = (wallet: string, assetId: number) => `https://mainnet-algorand.api.purestake.io/idx2/v2/accounts/${wallet}/assets?asset-id=${assetId}`
+const BALANCE_API = (wallet: string, assetId: number) => `https://${process.env.NETWORK_ENV}-algorand.api.purestake.io/idx2/v2/accounts/${wallet}/assets?asset-id=${assetId}`
 
 export const walletBalance = async (wallet: string, assetId: number) => {
     let isValid = false

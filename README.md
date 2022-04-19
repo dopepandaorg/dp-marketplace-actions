@@ -36,8 +36,12 @@ In order to test the hello function locally, run the following command:
 
 - `npx sls invoke local -f hello --path src/functions/hello/mock.json` if you're using NPM
 - `yarn sls invoke local -f hello --path src/functions/hello/mock.json` if you're using Yarn
+
+Commands :
+
 - `yarn sls invoke local -f CastVoteWithTx --path src/functions/CastVoteWithTx/mock.json`
 - `yarn sls invoke local -f SyncVotesWeightByContest --path src/functions/SyncVotesWeightByContest/mock.json`
+- `yarn sls invoke local -f SyncProfileWithTx --path src/functions/SyncProfileWithTx/mock.json`
 
 Check the [sls invoke local command documentation](https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) for more information.
 
