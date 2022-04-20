@@ -43,9 +43,11 @@ const SyncProfileWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = asy
   const { wallet, txId } = event.body
   const { isValid, attributes } = await validateTransaction(txId, wallet, 'dp.profile')
 
+  const updateAttributs = {} as any
 
-  let updateAttributsOfProfile = { avatar_cid: attributes?.avatar_cid, banner_cid: attributes?.banner_cid, bio: attributes?.bio, display_name: attributes?.display_name, social_instagram: attributes?.social_instagram, social_twitter: attributes?.social_twitter, social_website: attributes?.social_website } as any
-
+  Object.keys(attributes).map(keys => {
+    updateAttributs[keys] = attributes[keys]
+  })
   if (!isValid) {
 
     return formatJSONError({
@@ -57,19 +59,13 @@ const SyncProfileWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = asy
       const handleAlreadyExist = data.profiles_aggregate.nodes
       if (error) {
         console.log('DEBUG: ', 'Error in Handle name already exist', error)
-
-        return formatJSONError({
-          errors: {
-            "message": 'Invalid Transaction'
-          }
-        })
-      } else if (handleAlreadyExist.length === 0) {
-        console.log('DEBUG: ', 'Handle name not already exist', handleAlreadyExist)
-        updateAttributsOfProfile.handle = attributes?.handle
+      
+      } else if (handleAlreadyExist.length > 0) {
+        console.log('DEBUG: ', 'Handle name already exist', handleAlreadyExist)
+        delete updateAttributs.handle
       }
     }
-
-    const { data, errors } = await hasuraExecute(HASURA_OPERATION, { wallet, object: updateAttributsOfProfile })
+    const { data, errors } = await hasuraExecute(HASURA_OPERATION, { wallet, object: updateAttributs })
 
     // if Hasura operation errors, then throw error
     if (errors) {
