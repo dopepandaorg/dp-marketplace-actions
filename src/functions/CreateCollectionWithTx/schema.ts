@@ -2,9 +2,7 @@ export default {
   type: "object",
   properties: {
     wallet: { type: 'string' },
-    txId: { type: 'string' },
-    title: { type: 'string' },
-    creator: { type: 'string' },
+    txId: { type: 'string' }
   },
-  required: ['wallet', 'txId', 'title', 'creator']
+  required: ['wallet', 'txId']
 } as const;
