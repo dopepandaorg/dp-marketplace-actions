@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@middy/core": "^2.5.3",
-    "@middy/http-json-body-parser": "^2.5.3"
+    "@middy/http-json-body-parser": "^2.5.3",
+    "algosdk": "^1.15.0",
+    "is-ipfs": "^6.0.2"
   },
   "devDependencies": {
     "@serverless/typescript": "^3.0.0",
