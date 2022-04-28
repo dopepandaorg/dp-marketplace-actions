@@ -44,6 +44,7 @@ Commands :
 - `yarn sls invoke local -f SyncProfileWithTx --path src/functions/SyncProfileWithTx/mock.json`
 - `yarn sls invoke local -f SetupEscrowListingWithTx --path src/functions/SetupEscrowListingWithTx/mock.json`
 - `yarn sls invoke local -f UpdateEscrowListingStatusWithTx --path src/functions/UpdateEscrowListingStatusWithTx/mock.json`
+- `yarn sls invoke local -f SetupEscrowListingWithTx --path src/functions/SetupEscrowListingWithTx/mock.json`
 
 Check the [sls invoke local command documentation](https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) for more information.
 
