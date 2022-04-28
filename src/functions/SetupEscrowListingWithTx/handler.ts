@@ -11,7 +11,7 @@ import { isValidAlgoAddress } from '@libs/algosdk'
  * 
  */
 const HASURA_OPERATION = `
-mutation SetupEscrowListingWithTx($asset_id: bigint!, $creator: String!, $seller: String!, $sale_qty: Int, $sale_price: bigint, $sale_royalty: Int, $sale_fee: Int, $application_version: Int, $application_id: Int, $application_address: String, $is_verified: Boolean = false, $status: String) {
+mutation SetupEscrowListingWithTx($asset_id: bigint!, $creator: String!, $seller: String!, $sale_qty: Int!, $sale_price: bigint!, $sale_royalty: Int, $sale_fee: Int, $application_version: Int, $application_id: Int, $application_address: String!, $is_verified: Boolean = false, $status: String!) {
   insert_escrow_listings_one(object: {asset_id: $asset_id, creator: $creator, seller: $seller, sale_qty: $sale_qty, sale_price: $sale_price, sale_royalty: $sale_royalty, sale_fee: $sale_fee, application_version: $application_version, application_id: $application_id, application_address: $application_address, is_verified: $is_verified, status: $status}){
     application_address
     application_id
