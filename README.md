@@ -42,6 +42,7 @@ Commands :
 - `yarn sls invoke local -f CastVoteWithTx --path src/functions/CastVoteWithTx/mock.json`
 - `yarn sls invoke local -f SyncVotesWeightByContest --path src/functions/SyncVotesWeightByContest/mock.json`
 - `yarn sls invoke local -f SyncProfileWithTx --path src/functions/SyncProfileWithTx/mock.json`
+- `yarn sls invoke local -f CreateCollectionWithTx --path src/functions/CreateCollectionWithTx/mock.json`
 
 Check the [sls invoke local command documentation](https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) for more information.
 
