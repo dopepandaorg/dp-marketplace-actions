@@ -9,22 +9,24 @@ import { hasuraExecute } from '@libs/hasura-client'
  * 
  */
 const HASURA_OPERATION = `
- mutation EventInsertParticipateRewards($object: {$amount: "bigint"! = 10, $wallet: "String"!, $type: "String"!}) {
-   insert_participation_rewards_one(object: {amount: $amount, wallet: $wallet, type: $type}, on_conflict: { constraint: participation_rewards_pkey, update_columns: type }) {
-     amount
-     id
-     created_at
-     type
-     is_claimed
-     wallet
-     updated_at
-   }
+ mutation EventInsertParticipateRewards($amount: bigint!, $type: String!, $wallet: String!) {
+  insert_participation_rewards_one(object: {amount: $amount, type: $type, wallet: $wallet }, on_conflict: {constraint: participation_rewards_pkey, update_columns: [amount]}) {
+    amount
+    id
+    type
+    wallet
+    updated_at
+    is_claimed
+    created_at
+  }
  }`
 
-const EventInsertParticipateRewards: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-  const { payload } = event.body
 
-  const { data, errors } = await hasuraExecute(HASURA_OPERATION, { amount: payload.amount, wallet: payload.wallet, type: payload.type })
+const EventInsertParticipateRewards: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+  const payload = event.body
+
+  const { data, errors } = await hasuraExecute(HASURA_OPERATION, { amount: payload?.amount, type: payload?.type, wallet: payload.wallet})
+
   // if Hasura operation errors, then throw error
   if (errors) {
     return formatJSONError({
