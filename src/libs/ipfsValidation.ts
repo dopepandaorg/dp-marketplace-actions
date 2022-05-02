@@ -1,4 +1,3 @@
-
 import { cid } from 'is-ipfs'
 
 /**

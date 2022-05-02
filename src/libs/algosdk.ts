@@ -1,4 +1,3 @@
-
 import algosdk from 'algosdk'
 
 /**
