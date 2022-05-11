@@ -1,0 +1,6 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{ \"wallet\": \"WLWWS33YW3KPUXV5YFMIAWYIY5O5NC5TSQZIN5WIRLWG3VY6J2HULVEPSQ\", \"txId\": \"ROAQRSIZASVXBJGFDNYRQ5BZ7KEYGGXTTK7AHX5LT7KQ3JNBNWNA\" }"
+}

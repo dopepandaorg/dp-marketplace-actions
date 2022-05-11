@@ -7,6 +7,7 @@ import ConnectProfile from '@functions/ConnectProfile'
 import CreateCollectionWithTx from '@functions/CreateCollectionWithTx'
 import SetupEscrowListingWithTx from '@functions/SetupEscrowListingWithTx'
 import UpdateEscrowListingStatusWithTx from '@functions/UpdateEscrowListingStatusWithTx'
+import UpdateProfileFeaturedGalleryWithTx from '@functions/UpdateProfileFeaturedGalleryWithTx'
 
 const serverlessConfiguration: AWS = {
   service: 'dp-marketplace-actions',
@@ -26,7 +27,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { SyncProfileWithTx, CastVoteWithTx, SyncVotesWeightByContest, ConnectProfile, CreateCollectionWithTx, SetupEscrowListingWithTx, UpdateEscrowListingStatusWithTx },
+  functions: { SyncProfileWithTx, CastVoteWithTx, SyncVotesWeightByContest, ConnectProfile, CreateCollectionWithTx, SetupEscrowListingWithTx, UpdateEscrowListingStatusWithTx, UpdateProfileFeaturedGalleryWithTx },
   package: { individually: true },
   custom: {
     esbuild: {
