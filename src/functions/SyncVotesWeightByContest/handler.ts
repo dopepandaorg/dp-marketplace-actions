@@ -5,7 +5,7 @@ import { middyfy } from '@libs/lambda'
 import schema from './schema'
 import { walletBalance } from '@libs/wallet-balance'
 
-const DPANDA_ASSET_ID = 391379500
+const DPANDA_ASSET_ID = process.env.NETWORK_ENV === 'mainnet' ? 391379500 : 85326355
 const ONE_MILLION_DPANDA = 1000000 * (1000 * 1000)
 
 const HASURA_GET_OPERATION = `
