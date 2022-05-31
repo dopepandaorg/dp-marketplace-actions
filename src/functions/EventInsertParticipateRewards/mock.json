@@ -1,0 +1,6 @@
+{
+    "headers": {
+        "Content-Type": "application/json"
+    },
+    "body": "{ \"wallet\": \"HHWCI5MIOCSEEH2IHPFXD3SEOTVKQNLCPZXNHYWSCMYOG2VHKYTJVFUVTY\", \"type\": \"escrow_listings\", \"amount\": 10  }"
+}
