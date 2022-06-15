@@ -11,7 +11,7 @@ import { isValidAlgoAddress } from '@libs/algosdk'
  * 
  */
 const HASURA_OPERATION = `
-mutation UpdateEscrowListingStatusWithTx($asset_id: bigint!, $creator: String!, $status: String!) {
+mutation UpdateEscrowListingWithTx($asset_id: bigint!, $creator: String!, $status: String!) {
   update_escrow_listings(where: {_and: {asset_id: {_eq: $asset_id}, creator: {_eq: $creator}}}, _set: {status: $status}) {
     returning {
       id
@@ -24,7 +24,7 @@ mutation UpdateEscrowListingStatusWithTx($asset_id: bigint!, $creator: String!, 
 }`
 
 
-const UpdateEscrowListingStatusWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+const UpdateEscrowListingWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   const { wallet, txId } = event.body
   const { isValid, attributes } = await validateTransaction(txId, wallet, 'dp.setupEscrowListing')
 
@@ -58,4 +58,4 @@ const UpdateEscrowListingStatusWithTx: ValidatedEventAPIGatewayProxyEvent<typeof
   }
 }
 
-export const main = middyfy(UpdateEscrowListingStatusWithTx)
+export const main = middyfy(UpdateEscrowListingWithTx)

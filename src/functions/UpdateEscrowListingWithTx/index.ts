@@ -9,7 +9,7 @@ export default {
     {
       http: {
         method: 'post',
-        path: 'UpdateProfileFeaturedGalleryWithTx',
+        path: 'UpdateEscrowListingWithTx',
         request: {
           schemas: {
             'application/json': schema,

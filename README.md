@@ -44,9 +44,9 @@ Commands :
 - `yarn sls invoke local -f SyncProfileWithTx --path src/functions/SyncProfileWithTx/mock.json`
 - `yarn sls invoke local -f CreateCollectionWithTx --path src/functions/CreateCollectionWithTx/mock.json`
 - `yarn sls invoke local -f SetupEscrowListingWithTx --path src/functions/SetupEscrowListingWithTx/mock.json`
-- `yarn sls invoke local -f UpdateEscrowListingStatusWithTx --path src/functions/UpdateEscrowListingStatusWithTx/mock.json`
+- `yarn sls invoke local -f UpdateEscrowListingWithTx --path src/functions/UpdateEscrowListingWithTx/mock.json`
 - `yarn sls invoke local -f EventInsertParticipateRewards --path src/functions/EventInsertParticipateRewards/mock.json`
-- `yarn sls invoke local -f UpdateProfileFeaturedGalleryWithTx --path src/functions/UpdateProfileFeaturedGalleryWithTx/mock.json`
+- `yarn sls invoke local -f UpdateFeaturedGalleryWithTx --path src/functions/UpdateFeaturedGalleryWithTx/mock.json`
 
 Check the [sls invoke local command documentation](https://www.serverless.com/framework/docs/providers/aws/cli-reference/invoke-local/) for more information.
 

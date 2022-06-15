@@ -10,14 +10,14 @@ import { hasuraExecute } from '@libs/hasura-client'
  * 
  */
 const HASURA_OPERATION = `
-mutation UpdateProfileFeaturedGalleryWithTx($wallet: String!, $featured_gallery: jsonb!) {
+mutation UpdateFeaturedGalleryWithTx($wallet: String!, $featured_gallery: jsonb!) {
   update_profiles_by_pk(pk_columns: {wallet: $wallet}, _set: {featured_gallery: $featured_gallery}) {
     featured_gallery
     wallet
   }
 }`
 
-const UpdateProfileFeaturedGalleryWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
+const UpdateFeaturedGalleryWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   const { wallet, txId } = event.body
   const { isValid, attributes: featuredGallery } = await validateTransaction(txId, wallet, 'dp.profileShowcase')
 
@@ -56,4 +56,4 @@ const UpdateProfileFeaturedGalleryWithTx: ValidatedEventAPIGatewayProxyEvent<typ
   }
 }
 
-export const main = middyfy(UpdateProfileFeaturedGalleryWithTx)
+export const main = middyfy(UpdateFeaturedGalleryWithTx)

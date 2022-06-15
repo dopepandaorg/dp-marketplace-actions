@@ -6,10 +6,10 @@ import SyncVotesWeightByContest from '@functions/SyncVotesWeightByContest'
 import ConnectProfile from '@functions/ConnectProfile'
 import CreateCollectionWithTx from '@functions/CreateCollectionWithTx'
 import SetupEscrowListingWithTx from '@functions/SetupEscrowListingWithTx'
-import UpdateEscrowListingStatusWithTx from '@functions/UpdateEscrowListingStatusWithTx'
+import UpdateEscrowListingWithTx from '@functions/UpdateEscrowListingWithTx'
 import SubmitEntryWithTx from '@functions/SubmitEntryWithTx'
 import EventInsertParticipateRewards from '@functions/EventInsertParticipateRewards'
-import UpdateProfileFeaturedGalleryWithTx from '@functions/UpdateProfileFeaturedGalleryWithTx'
+import UpdateFeaturedGalleryWithTx from '@functions/UpdateFeaturedGalleryWithTx'
 
 const serverlessConfiguration: AWS = {
   service: 'dp-marketplace-actions',
@@ -29,7 +29,7 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { SyncProfileWithTx, CastVoteWithTx, SyncVotesWeightByContest, ConnectProfile, CreateCollectionWithTx, SetupEscrowListingWithTx, UpdateEscrowListingStatusWithTx, SubmitEntryWithTx, EventInsertParticipateRewards, UpdateProfileFeaturedGalleryWithTx },
+  functions: { SyncProfileWithTx, CastVoteWithTx, SyncVotesWeightByContest, ConnectProfile, CreateCollectionWithTx, SetupEscrowListingWithTx, UpdateEscrowListingWithTx, SubmitEntryWithTx, EventInsertParticipateRewards, UpdateFeaturedGalleryWithTx },
   package: { individually: true },
   custom: {
     esbuild: {
