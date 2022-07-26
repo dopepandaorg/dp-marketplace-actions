@@ -4,46 +4,37 @@ import { validateTransaction } from '@libs/transaction-validator'
 import { middyfy } from '@libs/lambda'
 import schema from './schema'
 import { hasuraExecute } from '@libs/hasura-client'
-import { isValidAlgoAddress } from '@libs/algosdk'
 
 /**
  * Hasura option to call and validate the request
  * 
  */
 const HASURA_OPERATION = `
-mutation UpdateEscrowListingWithTx($asset_id: bigint!, $creator: String!, $status: String!) {
-  update_escrow_listings(where: {_and: {asset_id: {_eq: $asset_id}, creator: {_eq: $creator}}}, _set: {status: $status}) {
-    returning {
-      id
-      creator
-      asset_id
-      status
-      updated_at
-    }
+mutation UpdateEscrowListingWithTx($id: uuid!, $status: String!, $sale_date: timestamptz!) {
+  update_escrow_listings_by_pk(pk_columns: {id: $id}, _set: {status: $status, sale_date: $sale_date}) {
+    status
+    id
+    asset_id
+    application_id
+    application_address
+    creator
+    created_at
+    updated_at
   }
 }`
 
 
 const UpdateEscrowListingWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
-  const { wallet, txId } = event.body
-  const { isValid, attributes } = await validateTransaction(txId, wallet, 'dp.setupEscrowListing')
-
-  const isValidCreatorAddress = await isValidAlgoAddress(attributes?.creator)
-
-  if (!isValidCreatorAddress) {
-    return formatJSONError({
-      errors: 'Invalid Algorand Creator Address'
-    })
-  }
+  const { wallet, txId, escrowId } = event.body
+  const { isValid } = await validateTransaction(txId, wallet)
 
   if (!isValid) {
-
     return formatJSONError({
       errors: 'Invalid Transaction'
     })
   } else {
 
-    const { data, errors } = await hasuraExecute(HASURA_OPERATION, { asset_id: attributes.asset_id, creator: attributes.creator, status: attributes.status })
+    const { data, errors } = await hasuraExecute(HASURA_OPERATION, { id: escrowId, status: 'escrow_sold', sale_date: new Date().toISOString() })
 
     // if Hasura operation errors, then throw error
     if (errors) {
@@ -53,7 +44,7 @@ const UpdateEscrowListingWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schem
     }
 
     return formatJSONResponse({
-      ...data.update_profiles_by_pk
+      ...data.update_escrow_listings_by_pk
     })
   }
 }

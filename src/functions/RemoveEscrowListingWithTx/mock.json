@@ -1,0 +1,6 @@
+{
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "body": "{ \"wallet\": \"Q4NKDEOL24EOU76OHWWOYY7U43KYL7JOWXWX32JHJKCDTFFZNDXRZ4XHPU\", \"txId\": \"IAKNM6QWQTD677WXHOVEQV22QXMY3VU6ESUKWMHRBRYK2IXO6JLQ\", \"appId\": 101106760, \"assetId\": 97271462, \"id\": \"24f90dc9-a5f1-44f2-86ba-3de69eff3029\" }"
+}

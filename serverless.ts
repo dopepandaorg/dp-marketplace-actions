@@ -1,6 +1,6 @@
-import type { AWS } from '@serverless/typescript';
+import type { AWS } from '@serverless/typescript'
 
-import SyncProfileWithTx from '@functions/SyncProfileWithTx';
+import SyncProfileWithTx from '@functions/SyncProfileWithTx'
 import CastVoteWithTx from '@functions/CastVoteWithTx'
 import SyncVotesWeightByContest from '@functions/SyncVotesWeightByContest'
 import ConnectProfile from '@functions/ConnectProfile'
@@ -10,6 +10,9 @@ import UpdateEscrowListingWithTx from '@functions/UpdateEscrowListingWithTx'
 import SubmitEntryWithTx from '@functions/SubmitEntryWithTx'
 import EventInsertParticipateRewards from '@functions/EventInsertParticipateRewards'
 import UpdateFeaturedGalleryWithTx from '@functions/UpdateFeaturedGalleryWithTx'
+import SyncCollection1dAnalytics from '@functions/SyncCollection1dAnalytics'
+import SyncCollectionWithTx from '@functions/SyncCollectionWithTx'
+import RemoveEscrowListingWithTx from '@functions/RemoveEscrowListingWithTx'
 
 const serverlessConfiguration: AWS = {
   service: 'dp-marketplace-actions',
@@ -29,7 +32,21 @@ const serverlessConfiguration: AWS = {
     },
   },
   // import the function via paths
-  functions: { SyncProfileWithTx, CastVoteWithTx, SyncVotesWeightByContest, ConnectProfile, CreateCollectionWithTx, SetupEscrowListingWithTx, UpdateEscrowListingWithTx, SubmitEntryWithTx, EventInsertParticipateRewards, UpdateFeaturedGalleryWithTx },
+  functions: {
+    SyncProfileWithTx,
+    CastVoteWithTx,
+    SyncVotesWeightByContest,
+    ConnectProfile,
+    CreateCollectionWithTx,
+    SetupEscrowListingWithTx,
+    UpdateEscrowListingWithTx,
+    SubmitEntryWithTx,
+    EventInsertParticipateRewards,
+    UpdateFeaturedGalleryWithTx,
+    SyncCollectionWithTx,
+    SyncCollection1dAnalytics,
+    RemoveEscrowListingWithTx
+  },
   package: { individually: true },
   custom: {
     esbuild: {
@@ -43,6 +60,6 @@ const serverlessConfiguration: AWS = {
       concurrency: 10,
     },
   },
-};
+}
 
-module.exports = serverlessConfiguration;
+module.exports = serverlessConfiguration

@@ -3,7 +3,7 @@ const fetch = require("node-fetch")
 /**
  * Execute the parent operation in Hasura
  */
-export const hasuraExecute = async (operation: string, variables: any) => {
+export const hasuraExecute = async (operation: string, variables: any): any => {
     const fetchResponse = await fetch(
         process.env.HASURA_API,
         {
@@ -19,5 +19,6 @@ export const hasuraExecute = async (operation: string, variables: any) => {
     )
     const data = await fetchResponse.json()
     console.log('DEBUG: ', data)
+
     return data
 }

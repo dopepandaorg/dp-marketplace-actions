@@ -12,13 +12,16 @@ import { isValidIPFS } from '@libs/ipfsValidation'
  * 
  */
 const HASURA_OPERATION = `
-mutation CreateCollectionWithTx($object: collections_insert_input!) {
-  insert_collections_one(object: $object){
+mutation CreateCollectionWithTx($slug: String = null, $title: String!, $description: String = "", $creator: String!, $avatar_cid: String = "", $banner_cid: String = "") {
+  insert_collections_one(on_conflict: {constraint: collections_pkey, update_columns: title}, object: {title: $title, slug: $slug, creator: $creator, avatar_cid: $avatar_cid, banner_cid: $banner_cid, description: $description}) {
+    id
+    avatar_cid
+    banner_cid
     creator
     description
-    thumbnail_cid
+    slug
     title
-    id
+    is_verified
   }
 }`
 
@@ -26,37 +29,29 @@ mutation CreateCollectionWithTx($object: collections_insert_input!) {
 const CreateCollectionWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> = async (event) => {
   const { wallet, txId } = event.body
   const { isValid, attributes } = await validateTransaction(txId, wallet, 'dp.collection')
-  const isIPFS = await isValidIPFS(attributes?.thumbnail_cid)
-
-
-  const isValidAddress = await isValidAlgoAddress(attributes?.creator)
-
-  if (!isValidAddress) {
-    return formatJSONError({
-      errors: 'Invalid Algorand Address'
-    })
-  }
-  const collectionInsertAttribute = {} as any
-
-  Object.keys(attributes).map(keys => {
-    collectionInsertAttribute[keys] = attributes[keys]
-  })
-
-
+  
+  const isIPFS = attributes?.avatar_cid ? await isValidIPFS(attributes?.avatar_cid) : true
+  const isValidAddress = await isValidAlgoAddress(wallet)
 
   if (!isValid) {
-
     return formatJSONError({
       errors: 'Invalid Transaction'
     })
-  } else if (!isIPFS) {
-    console.info('DEBUG: isIPFS', isIPFS)
+  } else if (!isValidAddress) {
+    return formatJSONError({
+      errors: 'Invalid Algorand Address'
+    })
+  } else if (!isIPFS) {  
     return formatJSONError({
       errors: 'Invalid IPFS'
     })
   } else {
-
-    const { data, errors } = await hasuraExecute(HASURA_OPERATION, { object: collectionInsertAttribute })
+    // Load actions within hasura
+    const { data, errors } = await hasuraExecute(HASURA_OPERATION, {
+      title: attributes.title,
+      description: attributes.description,
+      creator: wallet
+    })
 
     // if Hasura operation errors, then throw error
     if (errors) {
@@ -65,8 +60,9 @@ const CreateCollectionWithTx: ValidatedEventAPIGatewayProxyEvent<typeof schema> 
       })
     }
 
+    // Return the response to hasura
     return formatJSONResponse({
-      ...data.update_profiles_by_pk
+      ...data.insert_collections_one
     })
   }
 }
